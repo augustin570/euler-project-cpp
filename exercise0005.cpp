@@ -1,18 +1,15 @@
 #include <iostream>
-
-bool isDivisibleByAll(int number, int n) {
-  for (int i{2}; i <= n; ++i)
-    if (number % i != 0)
-      return false;
-
-  return true;
-}
+#include <cmath>
 
 int main() {
-  int n{20}, answer{n + 1};
+  int n {20}, primes[] {2, 3, 5, 7, 11, 13, 17, 19};
+  unsigned long int answer {1};
 
-  while (!isDivisibleByAll(answer, n))
-    ++answer;
+  for (auto prime : primes) {
+    answer *= static_cast<unsigned long int>(
+      std::pow(prime, std::floor(std::log(n) / std::log(prime)))
+    );
+  }
 
   std::cout << "Answer: " << answer << std::endl;
 
